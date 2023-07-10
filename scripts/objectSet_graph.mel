@@ -1,0 +1,39 @@
+// IO
+vnnCompound $gInputSetGraph "/" -addIONode true;
+vnnCompound $gInputSetGraph "/" -addIONode false;
+
+// Create chain of set_property nodes
+vnnCompound $gInputSetGraph "/" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/" -addNode "BifrostGraph,Core::Object,set_property";
+vnnConnect $gInputSetGraph "/set_property.out_object" "/set_property1.object";
+vnnConnect $gInputSetGraph "/set_property1.out_object" "/set_property2.object";
+vnnConnect $gInputSetGraph "/set_property2.out_object" "/set_property3.object";
+
+// Set keys
+vnnNode $gInputSetGraph "/set_property" -setPortDefaultValues "key" "meshes";
+vnnNode $gInputSetGraph "/set_property1" -setPortDefaultValues "key" "strands";
+vnnNode $gInputSetGraph "/set_property2" -setPortDefaultValues "key" "transforms";
+vnnNode $gInputSetGraph "/set_property3" -setPortDefaultValues "key" "bobs";
+
+// Later addition, setup graph input
+string $tmpTransform = `createNode transform -n "tmpTransform" -ss`;
+string $tmpPath = $tmpTransform + "/" + `createNode nurbsCurve -p $tmpTransform -n "tmpCurve1" -ss`;
+$tmpPath = $tmpPath + " " + $tmpTransform + "/" + `createNode nurbsCurve -p $tmpTransform -n "tmpCurve2" -ss`;
+
+vnnNode $gInputSetGraph "/input" -createOutputPort "meshes" "array<Object>";
+vnnNode $gInputSetGraph "/input" -createOutputPort "strands" "Object" -portOptions ("pathinfo={path=" + $tmpPath + ";setOperation=+;active=true;channels=*;computeTangents=true;computeLengths=false;sampleMode=1;multiplier=1;evenlySpaced=false;targetSegLength=1;matchEnds=false}");
+vnnNode $gInputSetGraph "/input" -createOutputPort "transforms" "array<Math::float4x4>";
+vnnNode $gInputSetGraph "/input" -createOutputPort "bobs" "array<Object>";
+
+vnnConnect $gInputSetGraph "/input.meshes" "/set_property.value";
+vnnConnect $gInputSetGraph "/input.strands" "/set_property1.value";
+vnnConnect $gInputSetGraph "/input.transforms" "/set_property2.value";
+vnnConnect $gInputSetGraph "/input.bobs" "/set_property3.value";
+
+delete $tmpTransform;
+
+// Compound Output
+vnnNode $gInputSetGraph "/output" -createInputPort "object_set" "Object";
+vnnConnect $gInputSetGraph "/set_property3.out_object" "/output.object_set";

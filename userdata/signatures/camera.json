@@ -1,0 +1,16 @@
+{
+    "ignore": false,
+    "attrs": [
+        "worldMatrix",
+        "nearClipPlane",
+        "farClipPlane",
+        "focalLength",
+        "overscan",
+        "focusDistance",
+        "cameraAperture",
+        "orthographic",
+        "orthographicWidth",
+        "ovrgb"
+    ],
+    "geo_attr": null
+}

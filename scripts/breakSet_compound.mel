@@ -1,0 +1,28 @@
+vnnCompound -create "break_set" $gInputSetGraph "/";
+vnnNode $gInputSetGraph "/break_set/input" -createOutputPort "object_set" "Object";
+vnnCompound $gInputSetGraph "/break_set" -addNode "BifrostGraph,Core::Object,get_property";
+vnnCompound $gInputSetGraph "/break_set" -addNode "BifrostGraph,Core::Object,get_property";
+vnnCompound $gInputSetGraph "/break_set" -addNode "BifrostGraph,Core::Object,get_property";
+vnnCompound $gInputSetGraph "/break_set" -addNode "BifrostGraph,Core::Object,get_property";
+vnnConnect $gInputSetGraph "/break_set.object_set" "/break_set/get_property.object";
+vnnConnect $gInputSetGraph "/break_set.object_set" "/break_set/get_property1.object";
+vnnConnect $gInputSetGraph "/break_set.object_set" "/break_set/get_property2.object";
+vnnConnect $gInputSetGraph "/break_set.object_set" "/break_set/get_property3.object";
+vnnNode $gInputSetGraph "/break_set/get_property" -setPortDefaultValues "key" "meshes";
+vnnNode $gInputSetGraph "/break_set/get_property1" -setPortDefaultValues "key" "strands";
+vnnNode $gInputSetGraph "/break_set/get_property2" -setPortDefaultValues "key" "transforms";
+vnnNode $gInputSetGraph "/break_set/get_property3" -setPortDefaultValues "key" "bobs";
+vnnNode $gInputSetGraph "/break_set/get_property" -setPortDataType "default_and_type" "array<Object>";
+vnnNode $gInputSetGraph "/break_set/get_property1" -setPortDataType "default_and_type" "Object";
+vnnNode $gInputSetGraph "/break_set/get_property2" -setPortDataType "default_and_type" "array<Math::float4x4>";
+vnnNode $gInputSetGraph "/break_set/get_property3" -setPortDataType "default_and_type" "array<Object>";
+
+vnnNode $gInputSetGraph "/break_set/output" -createInputPort "meshes" "array<Object>";
+vnnNode $gInputSetGraph "/break_set/output" -createInputPort "strands" "Object";
+vnnNode $gInputSetGraph "/break_set/output" -createInputPort "transforms" "array<Math::float4x4>";
+vnnNode $gInputSetGraph "/break_set/output" -createInputPort "bobs" "array<Object>";
+
+vnnConnect $gInputSetGraph "/break_set/get_property.value" "/break_set.meshes";
+vnnConnect $gInputSetGraph "/break_set/get_property1.value" "/break_set.strands";
+vnnConnect $gInputSetGraph "/break_set/get_property2.value" "/break_set.transforms";
+vnnConnect $gInputSetGraph "/break_set/get_property3.value" "/break_set.bobs";

@@ -1,0 +1,119 @@
+global proc shelf_AllTheInputs () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Set Signature for selected object type" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Set Sig" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -imageOverlayLabel "Set Sig" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "menuIconEdit.png" 
+        -image1 "menuIconEdit.png" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "import AllTheInputs\nAllTheInputs.signature.setSelSignature()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "Clear Signature Cache" ( "import AllTheInputs\nAllTheInputs.signature.SIGNATURES.clear()" )
+        -mip 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Convert the selection to Bifrost objects and connect them to the current graph" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Bobify Selection" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "out_bifrostGraphShape_200.png" 
+        -image1 "out_bifrostGraphShape_200.png" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "import AllTheInputs\nAllTheInputs.bobify.bobifySel()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "Remove Unused" ( "import AllTheInputs\nAllTheInputs.bobify.removeUnused()" )
+        -mip 0
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -flexibleWidthType 3
+        -flexibleWidthValue 32
+        -enable 1
+        -width 35
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Use selected sets as Bifrost Input Sets" 
+        -enableBackground 0
+        -backgroundColor 0 0 0 
+        -highlightColor 0.321569 0.521569 0.65098 
+        -align "center" 
+        -label "Input Set" 
+        -labelOffset 0
+        -rotation 0
+        -flipX 0
+        -flipY 0
+        -useAlpha 1
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.5 
+        -image "objectSet.svg" 
+        -image1 "objectSet.svg" 
+        -style "iconOnly" 
+        -marginWidth 0
+        -marginHeight 1
+        -command "import AllTheInputs\t\nAllTheInputs.inputSet.newInputSetSel()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+        -flat 1
+        -mi "Remove Unused" ( "import AllTheInputs\nAllTheInputs.inputSet.removeUnused()" )
+        -mip 0
+        -mi "Recreate Callbacks" ( "import AllTheInputs\nAllTheInputs.inputSet.recreateCallbacks()" )
+        -mip 1
+    ;
+
+} 

@@ -1,0 +1,13 @@
+{
+    "ignore": false,
+    "attrs": [
+        "worldMatrix",
+        "primitive",
+        "positiveSize",
+        "negativeSize",
+        "start",
+        "end",
+        "ovrgb"
+    ],
+    "geo_attr": null
+}

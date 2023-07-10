@@ -1,0 +1,8 @@
+{
+    "ignore": false,
+    "attrs": [
+        "diffuse",
+        "color"
+    ],
+    "geo_attr": null
+}

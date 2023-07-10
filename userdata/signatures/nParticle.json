@@ -1,0 +1,9 @@
+{
+    "ignore": false,
+    "attrs": [
+        "position",
+        "velocity",
+        "age"
+    ],
+    "geo_attr": null
+}

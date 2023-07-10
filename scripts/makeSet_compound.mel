@@ -1,0 +1,29 @@
+vnnCompound -create "make_set" $gInputSetGraph "/";
+
+vnnNode $gInputSetGraph "/make_set/input" -createOutputPort "meshes" "array<Object>";
+vnnNode $gInputSetGraph "/make_set/input" -createOutputPort "strands" "Object";
+vnnNode $gInputSetGraph "/make_set/input" -createOutputPort "transforms" "array<Math::float4x4>";
+vnnNode $gInputSetGraph "/make_set/input" -createOutputPort "bobs" "array<Object>";
+
+// Create chain of set_property nodes
+vnnCompound $gInputSetGraph "/make_set" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/make_set" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/make_set" -addNode "BifrostGraph,Core::Object,set_property";
+vnnCompound $gInputSetGraph "/make_set" -addNode "BifrostGraph,Core::Object,set_property";
+vnnConnect $gInputSetGraph "/make_set/set_property.out_object" "/make_set/set_property1.object";
+vnnConnect $gInputSetGraph "/make_set/set_property1.out_object" "/make_set/set_property2.object";
+vnnConnect $gInputSetGraph "/make_set/set_property2.out_object" "/make_set/set_property3.object";
+
+// Set keys
+vnnNode $gInputSetGraph "/make_set/set_property" -setPortDefaultValues "key" "meshes";
+vnnNode $gInputSetGraph "/make_set/set_property1" -setPortDefaultValues "key" "strands";
+vnnNode $gInputSetGraph "/make_set/set_property2" -setPortDefaultValues "key" "transforms";
+vnnNode $gInputSetGraph "/make_set/set_property3" -setPortDefaultValues "key" "bobs";
+
+vnnConnect $gInputSetGraph "/make_set/input.meshes" "/make_set/set_property.value";
+vnnConnect $gInputSetGraph "/make_set/input.strands" "/make_set/set_property1.value";
+vnnConnect $gInputSetGraph "/make_set/input.transforms" "/make_set/set_property2.value";
+vnnConnect $gInputSetGraph "/make_set/input.bobs" "/make_set/set_property3.value";
+
+vnnNode $gInputSetGraph "/make_set/output" -createInputPort "object_set" "Object";
+vnnConnect $gInputSetGraph "/make_set/set_property3.out_object" "/make_set/output.object_set";
