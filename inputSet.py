@@ -5,7 +5,6 @@ The Graph is automatically updated with the contents of the set.
 
 import maya.api.OpenMaya as om
 from maya import cmds as mc, mel
-from PySide2.QtCore import QTimer
 
 from .packages import bifrostUtils as bif
 from .packages import mayaUtils as mu
