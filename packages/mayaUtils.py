@@ -2,7 +2,6 @@ __version__ = "1.0.1"  # 2023-07-10 12:41
 
 import maya.api.OpenMaya as om
 from maya import cmds as mc, mel
-from PySide2.QtCore import QTimer
 
 
 class UndoChunk:
